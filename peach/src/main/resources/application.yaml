@@ -1,0 +1,103 @@
+# SERVER
+server:
+#  port: 9090
+  servlet:
+    context-path: /api
+
+# DB
+spring:
+  #  mvc:
+  #    pathmatch:
+  #      matching-strategy: ant_path_matcher
+  #  profiles:
+  #    include:
+  #      - redis
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # server
+#    url: jdbc:mysql://k8a601.p.ssafy.io:3306/cigma?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    # local
+    url: jdbc:mysql://127.0.0.1:3306/ahnspeach?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: peach
+    password: peach6
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 10
+      minimum-idle: 5
+  #      pool-name: fined&youHikariPool
+  jpa:
+    defer-datasource-initialization: true
+    database: mysql
+    hibernate:
+      ddl-auto: update
+    generate-ddl: false
+    properties:
+      hibernate:
+        #        SQL ??? ??? ????? ???
+        format_sql: true
+        #
+        show-sql: true
+        #
+        use_sql_comments: true
+
+  ## redis ??
+  # RDB? AOF? ??? ??
+  # - redis ?? ??? ???? ?? ????
+  # - redis ?? ??? AOF? ???? ??
+  # - redis ?? ??? RDB? ?? ??? ??
+
+#  redis:
+    #    host: localhost # localhost ??
+#    host: redis # Server ??
+#    port:
+#    password:
+
+# log level ??
+logging:
+  level:
+    org:
+      # security log level ??
+      springframework:
+        security: DEBUG
+      #      # hibernate log level ??
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: trace
+    #      # ???? ???? ??.
+    #      # AWS
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: ERROR
+
+# jwt ??
+#jwt:
+#  header: Authorization
+#  secret: Y2lnbWEtc3ByaW5nLWJvb3Qtand0LXNlY3JldC1rZXktY2lnbWEtc3ByaW5nLWJvb3Qtand0LXNlY3JldC1rZXktYnktYWpoCg==
+#  access-token-validity-in-seconds: 3600000 # accessToken ???? 1??
+#  refresh-token-validity-in-seconds: 1209600000 # refreshToken ???? 2?
+
+# aws ??
+#cloud:
+#  aws:
+#    region:
+#      static: ap-northeast-2
+#    s3:
+#      bucket: cigma-ajh
+#    access-key:
+#    secret-key:
+#    stack:
+#      auto: false
+
+# image ??
+#image:
+#  base-path:
+#    user: Users/Image/
+#    team: Teams/Image/
+#    project: Projects/Image/
+#  default-path:
+#    user: https://cigma-ajh.s3.ap-northeast-2.amazonaws.com/Users/Image/default.png
+#    team: https://cigma-ajh.s3.ap-northeast-2.amazonaws.com/Teams/Image/default.png
+#    project: https://cigma-ajh.s3.ap-northeast-2.amazonaws.com/Projects/Image/default.png
